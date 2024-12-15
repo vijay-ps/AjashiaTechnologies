@@ -1,26 +1,21 @@
-import { useState } from 'react';
-import Navbar from './components/navigation/Navbar';
-import Hero from './components/hero/Hero';
-import Features from './components/Features';
-import Stats from './components/Stats';
-import Footer from './components/footer/Footer';
-import './App.css';
+import "./App.css";
 
+import { Routes, Route } from "react-router-dom";
+import Home from "./Home";
+import AdminHome from "./AdminDashboard/adminhome";
+import AdminProductsList from "./AdminDashboard/AdminProductsList";
+import AdminDashboard from "./AdminDashboard/AdminDashboard";
+import AdminOrdersList from "./AdminDashboard/AdminOrdersList";
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
-
   return (
-    <div className={`min-h-screen ${darkMode ? 'bg-dark' : 'bg-white'}`}>
-      <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      <Hero darkMode={darkMode} />
-      <Features darkMode={darkMode} />
-      <Stats darkMode={darkMode} />
-      <Footer darkMode={darkMode} />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="admin" element={<AdminHome />}>
+        <Route index element={<AdminDashboard />} />
+        <Route path="products" element={<AdminProductsList />} />
+        <Route path="orders" element={<AdminOrdersList />} />
+      </Route>
+    </Routes>
   );
 }
 
